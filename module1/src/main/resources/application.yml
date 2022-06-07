@@ -10,6 +10,13 @@ spring:
     hibernate:
       ddl-auto: update
 
+logging:
+  level:
+    com.example.currencyexchange: DEBUG
+    org.hibernate: ERROR
+  file.path: D:/logs
+  file.name: ${logging.file.path}/currency.log
+
 server:
   error:
     include-message: always

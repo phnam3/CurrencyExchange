@@ -1,8 +1,8 @@
-package com.example.module1.service.impl;
+package com.example.currencyexchange.service.impl;
 
-import com.example.module1.entity.CurrencyExchange;
-import com.example.module1.repository.CurrencyExchangeRepository;
-import com.example.module1.service.CurrencyExchangeService;
+import com.example.currencyexchange.entity.CurrencyExchange;
+import com.example.currencyexchange.repository.CurrencyExchangeRepository;
+import com.example.currencyexchange.service.CurrencyExchangeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,8 @@
-package com.example.module1.dto;
+package com.example.currencyexchange.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor

@@ -1,6 +1,6 @@
-package com.example.module1.service;
+package com.example.currencyexchange.service;
 
-import com.example.module1.entity.CurrencyExchange;
+import com.example.currencyexchange.entity.CurrencyExchange;
 
 import java.util.List;
 

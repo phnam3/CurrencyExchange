@@ -1,10 +1,9 @@
-package com.example.module1.repository;
+package com.example.currencyexchange.repository;
 
-import com.example.module1.entity.CurrencyExchange;
+import com.example.currencyexchange.entity.CurrencyExchange;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository

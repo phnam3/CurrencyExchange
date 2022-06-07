@@ -1,9 +1,10 @@
-package com.example.module1.controller;
+package com.example.currencyexchange.controller;
 
-import com.example.module1.dto.WebRequestInfo;
-import com.example.module1.entity.CurrencyExchange;
-import com.example.module1.service.CurrencyExchangeService;
+import com.example.currencyexchange.dto.WebRequestInfo;
+import com.example.currencyexchange.entity.CurrencyExchange;
+import com.example.currencyexchange.service.CurrencyExchangeService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -23,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/api/v1/exchange")
 @AllArgsConstructor
+@Slf4j
 public class CurrencyExchangeController {
 
     private final CurrencyExchangeService currencyExchangeService;
@@ -31,6 +32,7 @@ public class CurrencyExchangeController {
     public String exchange(@RequestParam(name = "currency") String currency,
                            @RequestParam(name = "amount") Integer amount){
         Double rate = currencyExchangeService.findRate(currency);
+        log.info("Currency: {}, amount: {}, rate: {}",currency,amount,rate);
         WebRequestInfo webRequestInfo = new WebRequestInfo(amount, rate);
         WebClient webClient = WebClient.builder()
                 .baseUrl("http://localhost:8081")
@@ -47,6 +49,7 @@ public class CurrencyExchangeController {
         //TODO: map
         WebClient.RequestHeadersSpec<?> headersSpec = bodySpec.body(BodyInserters.fromPublisher(
                 Mono.just(webRequestInfo), WebRequestInfo.class));
+        log.info(headersSpec.toString());
         //4. define the headers from headersSpec
         //TODO: 4.
         //5. getting a response
@@ -59,6 +62,7 @@ public class CurrencyExchangeController {
                 return response.createException().flatMap(Mono::error);
             }
         });
+        log.debug("Currency Exchange Price: {}", specResponse.toString());
         return specResponse.block();
     }
 

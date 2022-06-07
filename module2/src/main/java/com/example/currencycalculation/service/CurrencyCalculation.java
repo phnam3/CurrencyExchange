@@ -1,4 +1,4 @@
-package com.example.module2.service;
+package com.example.currencycalculation.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

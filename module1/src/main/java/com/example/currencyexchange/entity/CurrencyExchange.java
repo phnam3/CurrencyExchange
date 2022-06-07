@@ -1,7 +1,6 @@
-package com.example.module1.entity;
+package com.example.currencyexchange.entity;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 

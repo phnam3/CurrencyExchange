@@ -7,17 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="module1" />
+        <module name="currencyexchange" />
         <module name="CurrencyExchange" />
-        <module name="module2" />
+        <module name="currencycalculation" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="CurrencyExchange" options="-parameters" />
-      <module name="module1" options="-parameters" />
-      <module name="module2" options="-parameters" />
+      <module name="currencycalculation" options="-parameters" />
+      <module name="currencyexchange" options="-parameters" />
     </option>
   </component>
 </project>
