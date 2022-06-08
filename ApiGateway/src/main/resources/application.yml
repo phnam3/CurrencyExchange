@@ -9,22 +9,30 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  application:
+    name: gateway-service
   cloud:
     gateway:
       routes:
         - id: currency_exchange
-          uri: 'http://localhost:8081'
+#          uri: 'http://localhost:8000'
+          uri: lb://CURRENCY-CALCULATION-SERVICE
           predicates:
             - Path=/api/v1/exchange/**
             - Query=src,exchange
         - id: calculate
-          uri: 'http://localhost:8082'
+#          uri: 'http://localhost:9000'
+          uri: lb://CURRENCY-RATE-SERVICE
           predicates:
             - Path=/api/v1/calculate/**
             - Query=src,calculate
-
 
 server:
   error:
     include-message: always
   port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

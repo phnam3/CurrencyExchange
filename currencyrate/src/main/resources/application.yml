@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Currency
+    username: postgres
+    password: Fateavernous123
+    show-sql: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  application:
+    name: currency-rate-service
+
+logging:
+  level:
+    com.example.currencyexchange: DEBUG
+    org.hibernate: ERROR
+  file.path: D:/logs
+  file.name: ${logging.file.path}/currency.log
+
+server:
+  error:
+    include-message: always
+  port: 8000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

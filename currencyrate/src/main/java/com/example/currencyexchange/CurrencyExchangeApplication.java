@@ -1,4 +1,4 @@
-package com.example.apigateway;
+package com.example.currencyexchange;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class ApiGatewayApplication {
+public class CurrencyExchangeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApiGatewayApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CurrencyExchangeApplication.class, args);
+    }
 
 }
