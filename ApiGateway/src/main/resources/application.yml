@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Currency
+    username: postgres
+    password: Fateavernous123
+    show-sql: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  cloud:
+    gateway:
+      routes:
+        - id: currency_exchange
+          uri: 'http://localhost:8081'
+          predicates:
+            - Path=/api/v1/exchange/**
+            - Query=src,exchange
+        - id: calculate
+          uri: 'http://localhost:8082'
+          predicates:
+            - Path=/api/v1/calculate/**
+            - Query=src,calculate
+
+
+server:
+  error:
+    include-message: always
+  port: 8080

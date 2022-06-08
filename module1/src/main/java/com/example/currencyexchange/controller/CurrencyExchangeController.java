@@ -28,7 +28,7 @@ public class CurrencyExchangeController {
 
     private final CurrencyExchangeService currencyExchangeService;
 
-    @GetMapping("/exchangeprice")
+    @GetMapping("/price")
     public String exchange(@RequestParam(name = "currency") String currency,
                            @RequestParam(name = "amount") Integer amount){
         Double rate = currencyExchangeService.findRate(currency);
@@ -71,12 +71,12 @@ public class CurrencyExchangeController {
         return currencyExchangeService.findAllRate();
     }
 
-    @GetMapping(path = "/ratecurrency")
+    @GetMapping(path = "/currency")
     public Double findRate(@RequestParam(name = "currency") String currency){
         return currencyExchangeService.findRate(currency);
     }
 
-    @GetMapping(path = "/rateid")
+    @GetMapping(path = "/id")
     public Double findRate(@RequestParam(name = "id") Integer id){
         return currencyExchangeService.findRate(id);
     }

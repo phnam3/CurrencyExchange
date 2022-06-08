@@ -7,17 +7,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="currencyexchange" />
         <module name="CurrencyExchange" />
         <module name="currencycalculation" />
+        <module name="module1" />
+        <module name="ApiGateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="currencyexchange" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ApiGateway" options="-parameters" />
       <module name="CurrencyExchange" options="-parameters" />
       <module name="currencycalculation" options="-parameters" />
       <module name="currencyexchange" options="-parameters" />
+      <module name="module1" options="-parameters" />
     </option>
   </component>
 </project>
