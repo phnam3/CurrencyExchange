@@ -16,16 +16,16 @@ spring:
       routes:
         - id: currency_exchange
 #          uri: 'http://localhost:8000'
-          uri: lb://CURRENCY-CALCULATION-SERVICE
-          predicates:
-            - Path=/api/v1/exchange/**
-            - Query=src,exchange
-        - id: calculate
-#          uri: 'http://localhost:9000'
           uri: lb://CURRENCY-RATE-SERVICE
           predicates:
+            - Path=/api/v1/exchange/**
+#            - Query=src,exchange
+        - id: calculate
+#          uri: 'http://localhost:9000'
+          uri: lb://CURRENCY-CALCULATION-SERVICE
+          predicates:
             - Path=/api/v1/calculate/**
-            - Query=src,calculate
+#            - Query=src,calculate
 
 server:
   error:

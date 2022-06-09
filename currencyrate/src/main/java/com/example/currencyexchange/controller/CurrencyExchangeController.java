@@ -26,7 +26,7 @@ public class CurrencyExchangeController {
 
     private final CurrencyExchangeService currencyExchangeService;
 
-    @GetMapping("/price")
+    @PostMapping("/price")
     public String exchange(@RequestBody CurrencyExchangeInfo currencyExchangeInfo){
         Double rate = currencyExchangeService.findRate(currencyExchangeInfo.getCurrency());
         log.info("Currency: {}, amount: {}, rate: {}",currencyExchangeInfo.getCurrency(),currencyExchangeInfo.getAmount(),rate);
@@ -40,7 +40,7 @@ public class CurrencyExchangeController {
         //1. define http method
         WebClient.UriSpec<WebClient.RequestBodySpec> uriSpec = webClient.method(HttpMethod.POST);
         //2. define the url from uriSpec
-        WebClient.RequestBodySpec bodySpec = uriSpec.uri("/api/v1/calculate/exchange?src=calculate");
+        WebClient.RequestBodySpec bodySpec = uriSpec.uri("/api/v1/calculate/exchange");
         //3. define the request body from bodySpec
         LinkedMultiValueMap map = new LinkedMultiValueMap();
         //TODO: map
