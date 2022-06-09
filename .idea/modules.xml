@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ApiGateway/api-gateway.iml" filepath="$PROJECT_DIR$/ApiGateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/currencyrate/currency-rate.iml" filepath="$PROJECT_DIR$/currencyrate/currency-rate.iml" />
+    </modules>
+  </component>
+</project>

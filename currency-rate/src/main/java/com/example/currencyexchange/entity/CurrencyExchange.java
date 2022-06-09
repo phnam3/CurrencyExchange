@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@Table(name = "currency_exchange", schema = "currency")
+@Table(name = "exchange", schema = "currency")
 @EqualsAndHashCode
 @ToString
 @NoArgsConstructor

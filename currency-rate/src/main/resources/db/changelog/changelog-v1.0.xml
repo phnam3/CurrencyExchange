@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+    http://www.liquibase.org/xml/ns/pro
+    http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="1" author="Fate">
+        <createTable tableName="exchange">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="currency_type" type="varchar(255)"></column>
+            <column name="rate" type="float"></column>
+        </createTable>
+        <insert tableName="exchange">
+            <column name="currency_type" value="VND"></column>
+            <column name="rate" value="23.191"></column>
+        </insert>
+        <insert tableName="exchange">
+            <column name="currency_type" value="EUR"></column>
+            <column name="rate" value="0.932"></column>
+        </insert>
+        <insert tableName="exchange">
+            <column name="currency_type" value="AUD"></column>
+            <column name="rate" value="1.386"></column>
+        </insert>
+        <insert tableName="exchange">
+            <column name="currency_type" value="CAD"></column>
+            <column name="rate" value="1.26"></column>
+        </insert>
+        <insert tableName="exchange">
+            <column name="currency_type" value="SGD"></column>
+            <column name="rate" value="1.374"></column>
+        </insert>
+        <insert tableName="exchange">
+            <column name="currency_type" value="JPY"></column>
+            <column name="rate" value="131.079"></column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
