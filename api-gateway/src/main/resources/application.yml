@@ -11,22 +11,26 @@ spring:
       ddl-auto: update
   application:
     name: gateway-service
-  cloud:
-    gateway:
-      routes:
-        - id: currency_exchange
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: currency_exchange
 #          uri: 'http://localhost:8000'
-          uri: lb://CURRENCY-RATE-SERVICE
-          predicates:
-            - Path=/api/v1/exchange/**
-#            - Query=src,exchange
-        - id: calculate
+#          uri: lb://CURRENCY-RATE-SERVICE
+#          predicates:
+#            - Path=/api/v1/exchange/**
+#            - Query=access,true
+#        - id: calculate
 #          uri: 'http://localhost:9000'
-          uri: lb://CURRENCY-CALCULATION-SERVICE
-          predicates:
-            - Path=/api/v1/calculate/**
-#            - Query=src,calculate
-
+#          uri: lb://CURRENCY-CALCULATION-SERVICE
+#          predicates:
+#            - Path=/api/v1/calculate/**
+#            - Query=access,true
+#        - id: authentication
+#          uri: 'http//localhost:7000'
+#          uri: lb://AUTHENTICATION-SERVICE
+#          predicates:
+#            - Path=/api/v1/auth/confirm
 server:
   error:
     include-message: always

@@ -7,11 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
-        <module name="CurrencyExchange" />
-        <module name="eureka-server" />
+        <module name="EurekaServer" />
         <module name="currency-calculation" />
         <module name="currency-rate" />
+        <module name="api-gateway" />
+        <module name="currencyrate" />
+        <module name="CurrencyExchange" />
+        <module name="ApiGateway" />
+        <module name="authentication" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -19,18 +22,23 @@
       <module name="currency-rate" target="11" />
       <module name="currencycalculation" target="11" />
       <module name="currencyexchange" target="11" />
+      <module name="eureka-server" target="11" />
       <module name="TestEurekaServer" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ApiGateway" options="-parameters" />
       <module name="CurrencyExchange" options="-parameters" />
+      <module name="EurekaServer" options="-parameters" />
       <module name="TestEurekaServer" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
+      <module name="authentication" options="-parameters" />
       <module name="currency-calculation" options="-parameters" />
       <module name="currency-rate" options="-parameters" />
       <module name="currencycalculation" options="-parameters" />
       <module name="currencyexchange" options="-parameters" />
+      <module name="currencyrate" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
     </option>
   </component>
