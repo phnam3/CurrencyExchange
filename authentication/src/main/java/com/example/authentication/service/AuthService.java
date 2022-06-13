@@ -47,4 +47,11 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtUtils.generateJwtToken(request.getEmail());
     }
+
+    public String getAuthorities(String email){
+        AuthUser authUser = userRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("Email not existed")
+        );
+        return authUser.getRole();
+    }
 }

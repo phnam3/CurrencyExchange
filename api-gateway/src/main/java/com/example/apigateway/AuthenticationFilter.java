@@ -12,7 +12,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 @Component
@@ -32,9 +35,19 @@ public class AuthenticationFilter implements GatewayFilter {
                 response.setStatusCode(HttpStatus.UNAUTHORIZED);
                 return response.setComplete();
             }
-            if(!confirmRequest(request)){
+
+            String authorities = confirmRequest(request);
+
+            if ("".equals(authorities)) {
                 ServerHttpResponse response = exchange.getResponse();
                 response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                return response.setComplete();
+            }
+            try {
+                getAccessList(authorities).contains(request.getURI().getPath());
+            } catch (Exception e){
+                ServerHttpResponse response = exchange.getResponse();
+                response.setStatusCode(HttpStatus.FORBIDDEN);
                 return response.setComplete();
             }
         }
@@ -42,41 +55,34 @@ public class AuthenticationFilter implements GatewayFilter {
         return chain.filter(exchange);
     }
 
-    private boolean confirmRequest(ServerHttpRequest request) {
+    private String confirmRequest(ServerHttpRequest request) {
 
         String token = request.getHeaders().getOrEmpty("Authorization").get(0);
 
-//        WebClient webClient = WebClient.builder()
-//                .baseUrl("http://localhost:8080")
-//                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-//                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-//                .defaultHeader("Authentication", token)
-//                .build();
-//        WebClient.UriSpec<WebClient.RequestBodySpec> uriSpec = webClient.method(HttpMethod.POST);
-//        WebClient.RequestBodySpec bodySpec = uriSpec.uri("/api/v1/auth/confirm");
-//        WebClient.RequestHeadersSpec<?> headersSpec = bodySpec.body(BodyInserters.fromValue("data"));
-//        headersSpec.exchangeToMono(response -> {
-//            if (response.statusCode().equals(HttpStatus.OK)) {
-//                return response.bodyToMono(String.class);
-//            } else if (response.statusCode().is4xxClientError() || response.statusCode().is5xxServerError()) {
-//                return Mono.just(response.statusCode().toString());
-//            } else {
-//                return response.createException().flatMap(Mono::error);
-//            }
-//        });
+        RestTemplate restTemplate = new RestTemplate();
         HttpHeaders header = new HttpHeaders() {{
+            set("Content-Type", "application/json");
+            set("Accept", "application/json");
             set("Authorization", token);
         }};
-        RestTemplate restTemplate = new RestTemplate();
-        try{
-            ResponseEntity<String> response = restTemplate.exchange("http://localhost:8080/api/v1/auth/confirm", HttpMethod.POST, new HttpEntity<String>(header), String.class);
-        } catch (Exception e){
-            return false;
+
+        ResponseEntity<String> response = restTemplate.exchange("http://localhost:8080/api/v1/auth/confirm",
+                HttpMethod.POST, new HttpEntity<String>(token.substring(7), header), String.class);
+        if (response.getStatusCode().is4xxClientError() || response.getStatusCode().is5xxServerError()) {
+            return "";
         }
-//        ResponseEntity<String> response = restTemplate.exchange("http://localhost:8080/api/v1/auth/confirm", HttpMethod.GET, new HttpEntity<String>(header), String.class);
-//        if(response.getStatusCode().is2xxSuccessful()) {
-//            return true;
-//        }
-        return true;
+
+        return response.getHeaders().getOrEmpty("Authorities").get(0);
+    }
+
+    //Manual DB -> should be localized
+    private List<String> getAccessList(String authorities){
+        Map<String, List<String>> accessList= new HashMap<>();
+        List<String> uriList = new ArrayList<>();
+        uriList.add("/api/v1/calculate/exchange");
+        accessList.put("SUPER_ADMIN", uriList);
+
+        List<String> result = accessList.get(authorities);
+        return result;
     }
 }
