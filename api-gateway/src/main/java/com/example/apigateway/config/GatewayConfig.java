@@ -1,6 +1,7 @@
 package com.example.apigateway.config;
 
-import com.example.apigateway.AuthenticationFilter;
+import com.example.apigateway.GatewayFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -11,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayConfig {
 
     @Autowired
-    private final AuthenticationFilter filter;
+    private final GatewayFilter filter;
 
-    public GatewayConfig(AuthenticationFilter filter) {
+    public GatewayConfig(GatewayFilter filter) {
         this.filter = filter;
     }
 
@@ -24,10 +25,13 @@ public class GatewayConfig {
                         .filters(f -> f.filter(filter))
                         .uri(("lb://CURRENCY-RATE-SERVICE")))
                 .route("calculate", r -> r.path("/api/v1/calculate/**")
-                        .filters(f -> f.filter(filter))
+                        .filters(f -> f.filter(filter).circuitBreaker(c ->
+                                c.setName("myFallBack").setFallbackUri("forward:/fallback").addStatusCode("INTERNAL_SERVER_ERROR")))
                         .uri(("lb://CURRENCY-CALCULATION-SERVICE")))
                 .route("authentication", r -> r.path("/api/v1/auth/**")
                         .uri(("lb://AUTHENTICATION-SERVICE")))
                 .build();
     }
+
+
 }
