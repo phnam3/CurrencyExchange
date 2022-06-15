@@ -9,6 +9,6 @@ import reactor.core.publisher.Mono;
 public class GatewayController {
     @RequestMapping("/fallback")
     public Mono<String> fallback(){
-        return Mono.just("API is taking too long. Please try again");
+        return Mono.just("API is down. Please try again in 10s");
     }
 }

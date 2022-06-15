@@ -25,8 +25,10 @@ public class GatewayConfig {
                         .filters(f -> f.filter(filter))
                         .uri(("lb://CURRENCY-RATE-SERVICE")))
                 .route("calculate", r -> r.path("/api/v1/calculate/**")
-                        .filters(f -> f.filter(filter).circuitBreaker(c ->
-                                c.setName("myFallBack").setFallbackUri("forward:/fallback").addStatusCode("INTERNAL_SERVER_ERROR")))
+                        .filters(f -> f.filter(filter)
+                                .circuitBreaker(c -> c.setName("myCircuitBreaker")
+                                        .setFallbackUri("forward:/fallback")
+                                        .addStatusCode("INTERNAL_SERVER_ERROR")))
                         .uri(("lb://CURRENCY-CALCULATION-SERVICE")))
                 .route("authentication", r -> r.path("/api/v1/auth/**")
                         .uri(("lb://AUTHENTICATION-SERVICE")))
