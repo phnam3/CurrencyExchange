@@ -18,8 +18,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api-gateway" target="11" />
-      <module name="currency-rate" target="11" />
       <module name="currencycalculation" target="11" />
       <module name="currencyexchange" target="11" />
       <module name="eureka-server" target="11" />

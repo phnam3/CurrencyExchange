@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class CurrencyCalculation {
     public Double calculate(Integer amount, Double rate) {
-        try {
-            Thread.sleep(5000);
-        } catch (Exception e){}
+//        try {
+//            Thread.sleep(5000);
+//        } catch (Exception e){}
         return amount * rate;
     }
 }
