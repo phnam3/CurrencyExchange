@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/Currency
     username: postgres
-    password: Fateavernous123
+    password: 
     show-sql: true
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
